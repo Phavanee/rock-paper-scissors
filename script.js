@@ -19,6 +19,22 @@ function getComputerChoice() {
 
 function getHumanChoice(humanChoice) {
     prompt("what will be your move?", humanChoice);
-    return humanChoice.toLowerCase();
+    humanChoice = humanChoice.toLowerCase();
+    if (humanChoice != "rock" || humanChoice != "paper" || humanChoice != "scissors") {
+        console.log(`error! you've brought a ${humanChoice} to a rock-paper-scissors fight.`)
+        return;
+    }
+    return humanChoice;
 }
 
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice == "paper" && computerChoice == "rock" ||
+        humanChoice == "rock" && computerChoice == "scissors" ||
+        humanChoice == "scissors" && computerChoice == "paper"
+    ) {
+        console.log(`you win! ${humanChoice} beats ${computerChoice}.`)
+    }
+    else {
+        console.log(`you lose! ${computerChoice} beats ${humanChoice}.`)
+    }
+}
