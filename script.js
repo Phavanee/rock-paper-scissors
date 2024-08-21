@@ -17,10 +17,10 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice(humanChoice) {
-    prompt("what will be your move?", humanChoice);
+function getHumanChoice() {
+    let humanChoice = prompt("what will be your move?", "");
     humanChoice = humanChoice.toLowerCase();
-    if (humanChoice != "rock" || humanChoice != "paper" || humanChoice != "scissors") {
+    if (humanChoice != "rock" && humanChoice != "paper" && humanChoice != "scissors") {
         console.log(`error! you've brought a ${humanChoice} to a rock-paper-scissors fight.`)
         return;
     }
@@ -32,9 +32,27 @@ function playRound(humanChoice, computerChoice) {
         humanChoice == "rock" && computerChoice == "scissors" ||
         humanChoice == "scissors" && computerChoice == "paper"
     ) {
-        console.log(`you win! ${humanChoice} beats ${computerChoice}.`)
+        console.log(`you win! ${humanChoice} beats ${computerChoice}.`);
+        ++humanScore;
+    }
+    else if (humanChoice == computerChoice) {
+        console.log(`tie! you both used ${humanChoice}.`)
     }
     else {
-        console.log(`you lose! ${computerChoice} beats ${humanChoice}.`)
+        console.log(`you lose! ${computerChoice} beats ${humanChoice}.`);
+        ++computerScore;
     }
+}
+
+function playGame() {
+    humanScore = 0;
+    computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        playRound(getHumanChoice(), getComputerChoice());
+    }
+
+    humanScore > computerScore ?
+        console.log(`congratulations, you are the victor with ${humanScore} out of 5 rounds won and ${5 - humanScore - computerScore} tie(s).`) :
+        console.log(`unfortunately, you have lost to computer. computer wins with ${computerScore} out of 5 rounds won and ${5 - humanScore - computerScore} tie(s).`);
 }
